@@ -1,10 +1,6 @@
 package com.struts.dao;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -13,8 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.struts.bean.Account;
-import com.struts.bean.Coffee;
 import com.struts.bean.Supplier;
 import com.struts.factory.ConnectionFactory;
 import com.struts.interf.ISupplierDAO;
