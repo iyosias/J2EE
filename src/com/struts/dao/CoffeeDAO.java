@@ -39,7 +39,6 @@ public class CoffeeDAO implements ICoffeeDAO {
 	    try{
 	    	tx = session.beginTransaction();
 	    	stlist = session.createQuery("from Coffee").list();
-
 	        tx.commit();
 
 		} catch(HibernateException ex ){
@@ -92,7 +91,6 @@ public class CoffeeDAO implements ICoffeeDAO {
 		} finally {
 			session.close();
 		}
-		
 		
 		return coffees;
 	}
