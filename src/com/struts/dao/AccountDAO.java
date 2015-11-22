@@ -20,9 +20,9 @@ public class AccountDAO implements IAccountDAO {
 	
 	public AccountDAO(){
 		try{
-			factory = new Configuration().configure().
-					addPackage("com.struts.bean")
-					.addAnnotatedClass(Account.class)
+			factory = new Configuration().configure()
+					//addPackage("com.struts.bean")
+					//.addAnnotatedClass(Account.class)
 					.buildSessionFactory();
 		} catch (Throwable ex){
 			System.err.println("Failed to create sessionFactory object." + ex);

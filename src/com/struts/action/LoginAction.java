@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.interceptor.SessionAware;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -39,8 +39,9 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	
 	public boolean isValidUser(User user){
 		@SuppressWarnings("resource")
-		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		IAccountServiceLib asl = (AccountServiceLib) context.getBean("account");
+		AbstractApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		context.registerShutdownHook();
+		IAccountServiceLib asl = (AccountServiceLib) context.getBean("accountServiceLib");
 		return asl.authenticate(user.getEmail(), user.getPassword());
 		
 	}

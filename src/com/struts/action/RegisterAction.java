@@ -22,7 +22,7 @@ public class RegisterAction extends ActionSupport {
 	public String execute() throws Exception {
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		IAccountServiceLib asl = (AccountServiceLib) context.getBean("account");
+		IAccountServiceLib asl = (AccountServiceLib) context.getBean("accountServiceLib");
 		//IAccountServiceLib asl = AccountServiceLibFactory.getAccountService();
 		asl.createAccount(getAccountBean());
 		

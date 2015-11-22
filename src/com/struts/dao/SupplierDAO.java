@@ -94,8 +94,6 @@ private static SessionFactory factory;
 		} finally {
 			session.close();
 		}
-		List<Supplier> sss = getAllSupplier();
-		System.out.println(sss);
 		
 		return true;
 		

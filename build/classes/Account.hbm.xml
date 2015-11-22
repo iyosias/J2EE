@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="Account" table="ACCOUNT">
+   <class name="com.struts.bean.Account" table="ACCOUNT">
       <meta attribute="class-description">
          This class contains the account detail. 
       </meta>
@@ -12,7 +12,7 @@
       <property name="firstname" column="firstname" type="string"/>
       <property name="middlename" column="middlename" type="string"/>
       <property name="lastname" column="lastname" type="string"/>
-      <property name="password" column="password]" type="string"/>
+      <property name="password" column="password" type="string"/>
       <property name="phone" column="phone" type="string"/>
    </class>
 </hibernate-mapping>
