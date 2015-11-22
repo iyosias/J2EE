@@ -1,8 +1,6 @@
 package com.struts.dao;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +13,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 
 import com.struts.bean.Coffee;
-import com.struts.factory.ConnectionFactory;
 import com.struts.interf.ICoffeeDAO;
 
 public class CoffeeDAO implements ICoffeeDAO {
@@ -100,31 +97,26 @@ public class CoffeeDAO implements ICoffeeDAO {
 		return coffees;
 	}
 
-
 	public boolean createCoffee(Coffee coffee){
-		ConnectionFactory cf = new ConnectionFactory();
-		Connection conn = null;
-		Statement stmt = null;
-		boolean status = false;
+		Session session = factory.openSession();
+		Transaction tx = null;
 		try{
-			conn = cf.getConnection();
-			stmt = conn.createStatement();
-
+			Coffee coffee1 = new Coffee();
+			coffee1 = coffee;
+			tx = session.beginTransaction();
+			session.save(coffee1);
+			session.getTransaction().commit();
 			
+		} catch(HibernateException ex ){
+			if (tx!=null)
+				tx.rollback();
+			ex.printStackTrace();
 			
-			String st = "insert into COFFEES " +
-					"values(\"" + coffee.getCof_name() + "\", " + coffee.getSup_id() + " , " + 
-					coffee.getPrice() + " , " + coffee.getSales() + " , " + 
-					coffee.getTotal() + ")";
-			
-
-		      stmt.executeUpdate(st);
-		      status = true;
+		} finally {
+			session.close();
 		}
-		catch (SQLException e){
-			e.printStackTrace();
-		}
-		return status;
+		
+		return true;
 	}
 
 	
