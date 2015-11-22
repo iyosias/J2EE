@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+	<!-- Remove .action extension -->
+	<constant name="struts.action.extension" value="" />
+	<constant name="struts.custom.i18n.resources" value="global" />
+	<!-- Enabling Developer Mode -->
+	<constant name="struts.devMode" value="true" />
+	
+	<package name="default" extends="struts-default" namespace="/action">
+		<!-- Declaration of the Interceptor -->
+		<interceptors>
+			<interceptor name="authenticationInterceptor"
+				class="com.struts.interceptor.AuthenticationInterceptor" />
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authenticationInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<action name="Login">
+			<result>/login.jsp</result>
+		</action>
+		
+		<action name="Register">
+			<result>/register.jsp</result>
+		</action>
+		
+
+		
+		
+		<action name="LoginAction" class="com.struts.action.LoginAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">dashboard</param>
+				<param name="namespace">/action</param>
+			</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		
+		<action name="Logout" class="com.struts.action.LogoutAction" method="execute">
+			<result name="success" type="redirectAction">
+				<param name="actionName">Login</param>
+				<param name="namespace">/action</param>
+			</result>
+		</action>
+		
+		
+		<action name="dashboard">
+			<interceptor-ref name="secureStack" />
+			<result>/dashboard.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+		
+		<action name="all-coffee" class="com.struts.action.AllCoffeeAction">
+			<interceptor-ref name="secureStack" />
+			<result>/viewallcoffee.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+		<action name="coffee-names" class="com.struts.action.CoffeeNamesAction">
+			<interceptor-ref name="secureStack" />
+			<result>/viewcoffeenames.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+		<action name="search-coffee" class="com.struts.action.SearchCoffeeAction">
+			<interceptor-ref name="secureStack" />
+			<result>/searchcoffee.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+		<action name="add-supplier">
+			<interceptor-ref name="secureStack" />
+			<result>/addsupplier.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+
+		
+		<action name="add-coffee" class="com.struts.action.AddCoffeeAction" method="getSupplierList">
+			<interceptor-ref name="secureStack" />
+			<result>/addcoffee.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+		
+		<action name="AddSupplierAction" class="com.struts.action.AddSupplierAction" method="execute">
+			<result>/thankyou.jsp</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">add-supplier</param>
+				<param name="namespace">/action</param>
+			</result>
+		</action>
+		
+		<action name="AddCoffeeAction" class="com.struts.action.AddCoffeeAction">
+			<result>/thankyou.jsp</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">add-coffee</param>
+				<param name="namespace">/action</param>
+			</result>
+		</action>
+		
+		<action name="RegisterAction" class="com.struts.action.RegisterAction" method="execute">
+			<result>/thankyou.jsp</result>
+			<result name="input">/register.jsp</result>
+		</action>
+		
+		<action name="SearchCoffeeAction" class="com.struts.action.SearchCoffeeAction" method="execute">
+			<result>/searchcoffee.jsp</result>
+		</action>
+		
+	</package>
+
+</struts>

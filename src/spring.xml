@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="account" class="com.struts.sl.AccountServiceLib">
+    	<property name="accountDao" ref="accountDao" />
+    </bean>
+    
+    <bean id="accountDao" class="com.struts.dao.AccountDAO">
+    </bean>
+    
+    
+    <bean id="coffee" class="com.struts.sl.CoffeeServiceLib">
+    	<property name="coffeeDao" ref="coffeeDao" />
+    </bean>
+    
+    <bean id="coffeeDao" class="com.struts.dao.CoffeeDAO">
+    </bean>
+    
+    <bean id="supplier" class="com.struts.sl.SupplierServiceLib">
+    	<property name="supplierDao" ref="supplierDao" />
+    </bean>
+    
+    <bean id="supplierDao" class="com.struts.dao.SupplierDAO">
+    </bean>
+    
+    
+    
+</beans>
