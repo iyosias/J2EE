@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 
 import com.struts.bean.Account;
 
@@ -16,14 +18,18 @@ import com.struts.interf.IAccountDAO;
 
 public class AccountDAO implements IAccountDAO {
 	
+	private MessageSource messageSource;
+	
+	@Autowired
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
+	}
+	
 	private static SessionFactory factory;
 	
 	public AccountDAO(){
 		try{
-			factory = new Configuration().configure()
-					//addPackage("com.struts.bean")
-					//.addAnnotatedClass(Account.class)
-					.buildSessionFactory();
+			factory = new Configuration().configure().buildSessionFactory();
 		} catch (Throwable ex){
 			System.err.println("Failed to create sessionFactory object." + ex);
 	         throw new ExceptionInInitializerError(ex); 
@@ -53,6 +59,8 @@ public class AccountDAO implements IAccountDAO {
 		return true;
 	}
 	public boolean authenticate(String email, String password){
+		System.out.println(this.messageSource.getMessage("authenticate", null, "Default Authentication", null));
+		System.out.println(this.messageSource.getMessage("authenticate.account", new Object[] {email, password}, "Default Account", null));
 		boolean status = false;
 		Session session = factory.openSession();
 		Transaction tx = null;

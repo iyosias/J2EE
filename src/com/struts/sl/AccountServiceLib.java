@@ -5,20 +5,27 @@ import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import com.struts.bean.Account;
 import com.struts.dao.AccountDAO;
 import com.struts.interf.IAccountServiceLib;
 
-// If i use the component class it will work I don't have to create a bean
-// definition inside the spring class but it means i can only have one bean for the class
+// If we use the component class it will work we don't have to create a bean
+// definition inside the spring class but it means we can only have one bean for the class
+// Another stereotype that we can use is controller. It does the same thing as component, but it also
+// tells spring that the bean is a controller layer
+// for Data access we use @Repository and for service we use @Service
+// Advantage of using this annotation is because it tells spring know what role the spring is doing
+// Secondly, it add a level of documentation
 
-@Component
+@Controller
 public class AccountServiceLib implements IAccountServiceLib{
 	
 	private AccountDAO accountDao;
 	
+
+
 	@Autowired 
 	@Required
 	public void setAccountDao(AccountDAO accounttDao) {

@@ -31,6 +31,16 @@
     <bean id="supplierDao" class="com.struts.dao.SupplierDAO">
     </bean>
     
+    
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    	<property name="basenames">
+    		<list>
+    			<value>mymessages</value>
+    		</list>
+    	</property>
+    </bean>
+    
+    
     <!-- Instead of adding all the annotation bean tag we can just use <context /> -->
     <!--  <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />-->

@@ -31,6 +31,7 @@ public class CoffeeDAO implements ICoffeeDAO {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Coffee> getAllCoffee() {
 		Session session = factory.openSession();
 	    Transaction tx = null;
@@ -74,6 +75,7 @@ public class CoffeeDAO implements ICoffeeDAO {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public ArrayList<String> getAllCoffeeNames() {
 		Session session = factory.openSession();
 	    Transaction tx = null;

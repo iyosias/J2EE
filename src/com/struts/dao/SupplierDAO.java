@@ -1,6 +1,6 @@
 package com.struts.dao;
 
-import java.sql.Connection;
+
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -10,7 +10,6 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import com.struts.bean.Supplier;
-import com.struts.factory.ConnectionFactory;
 import com.struts.interf.ISupplierDAO;
 
 
@@ -30,8 +29,8 @@ private static SessionFactory factory;
 		}
 	}
 	
-	ConnectionFactory cf = new ConnectionFactory();
-	Connection conn = null;
+
+	@SuppressWarnings("unchecked")
 	public List<Supplier> getAllSupplier() {
 		Session session = factory.openSession();
 	    Transaction tx = null;
@@ -54,6 +53,8 @@ private static SessionFactory factory;
 		}
 		return stlist;
 	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Integer> getAllSupplierId()  {
 		Session session = factory.openSession();
 	    Transaction tx = null;
